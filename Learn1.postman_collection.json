@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "ebb7cc75-7c2f-45e7-9978-469e4f1330ae",
+		"name": "Learn1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login Token POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "83aabb70-2f40-4435-9e73-f75bb8f90c10",
+						"exec": [
+							"var response = JSON.parse(responseBody)\r",
+							"tests [\"Valid User login \"] = pm.response.to.has.status(200);\r",
+							"tests [\"Token generated\"] = responseBody.has(\"token\");\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{emails}}\",\r\n    \"password\": \"{{pwds}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/login",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET all users in page 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd4d50fc-6afc-4ac8-98c5-bb5e21fab231",
+						"exec": [
+							"var response = JSON.parse(responseBody)\r",
+							"tests [\"Valid Response\"] = pm.response.to.has.status(200,201);\r",
+							"tests [\"Token generated\"] = responseBody.has(\"data\");\r",
+							"tests [\"User is in page 2\"] = response.page == \"1\";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET all users in page 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4caa2631-dc54-4145-85a5-e82ce18fd501",
+						"exec": [
+							"var response = JSON.parse(responseBody)\r",
+							"tests [\"Valid Response\"] = pm.response.to.has.status(200,201);\r",
+							"tests [\"Token generated\"] = responseBody.has(\"data\");\r",
+							"tests [\"User is in page 2\"] = response.page == \"2\";\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
